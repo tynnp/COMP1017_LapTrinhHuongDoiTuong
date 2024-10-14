@@ -1,2 +1,14 @@
-# COMP1017_LapTrinhHuongDoiTuong
-Kho lưu trữ môn Lập trình hướng đối tượng - HCMUE.
+## Thông tin
+Năm học:  
+Mã lớp học phần:  
+Tên học phần: **Lập trình hướng đối tượng**.  
+Giảng viên:  
+
+**Hình thức học**:
+
+**Phân bố điểm**:
+
+## Lưu trữ
+- **Ghi chú**:  
+- **Các bài tập**:  
+- **Đồ án**:  

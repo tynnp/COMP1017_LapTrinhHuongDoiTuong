@@ -10,5 +10,5 @@ Giảng viên:
 
 ## Lưu trữ
 - **Ghi chú**:  
-- **Các bài tập**:  
+- **Các bài tập**: Thư mục [Bai_tap](/Bai_tap/)  
 - **Đồ án**:  

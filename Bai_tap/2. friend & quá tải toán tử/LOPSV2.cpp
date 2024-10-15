@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 // Lớp Điểm
@@ -36,7 +37,7 @@ private:
 public:
     SinhVien();                                                     // khởi tạo mặc định
     SinhVien(string hoTen, string maSinhVien, Diem diemSinhVien);   // khởi tạo có tham số
-    SinhVien(const SinhVien other);                                 // sao chép
+    SinhVien(const SinhVien &other);                                // sao chép
     ~SinhVien();                                                    // hủy
 
     string getHoTen();                          // lấy họ tên
@@ -46,17 +47,21 @@ public:
     Diem getDiemSinhVien();                     // lấy danh sách điểm
     void setDiemSinhVien(Diem diemSinhVien);    // gán danh sách điểm
 
-    friend &operator istream >> (istream &in, SinhVien &sinhVien);          // toán tử >>
-    friend &operator ostream << (ostream &out, const SinhVien &sinhVien);   // toán tử <<
+    friend istream &operator >> (istream &in, SinhVien &sinhVien);          // toán tử >>
+    friend ostream &operator << (ostream &out, const SinhVien &sinhVien);   // toán tử <<
     SinhVien &operator = (const SinhVien &other);                           // toán tử =
     bool operator < (const SinhVien &other);                                // toán tử <
     double diemTrungBinhCong() const;                                       // lấy điểm trung bình của sinh viên
 };
 
 int main() {
-
+    SinhVien sv;
+    cin >> sv;
+    cout << sv;
     return 0;
 }
+
+// Định nghĩa lớp Điểm ---------------------------------------------------------------------------------------------------------------
 
 Diem::Diem() {
     size = 0;
@@ -135,4 +140,83 @@ double Diem::trungBinhCong() const {
     for (int i = 0; i < size; i++)
         res += danhSachDiem[i];
     return size > 0 ? res / size : 0;
+}
+
+// Định nghĩa lớp Sinh viên ---------------------------------------------------------------------------------------------------------------
+
+SinhVien::SinhVien() {
+    hoTen = maSinhVien = "";
+}
+
+SinhVien::SinhVien(string hoTen, string maSinhVien, Diem diemSinhVien) {
+    this->hoTen = hoTen;
+    this->maSinhVien = maSinhVien;
+    this->diemSinhVien = diemSinhVien;
+}
+
+SinhVien::SinhVien(const SinhVien &other) {
+    hoTen = other.hoTen;
+    maSinhVien = other.maSinhVien;
+    diemSinhVien = other.diemSinhVien;
+}
+
+SinhVien::~SinhVien() {
+    // không cần định nghĩa
+}
+
+string SinhVien::getHoTen() {
+    return hoTen;
+}
+
+void SinhVien::setHoTen(string hoTen) {
+    this->hoTen = hoTen;
+}
+
+string SinhVien::getMaSinhVien() {
+    return maSinhVien;
+}
+
+void SinhVien::setMaSinhVien(string maSinhVien) {
+    this->maSinhVien = maSinhVien;
+}
+
+Diem SinhVien::getDiemSinhVien() {
+    return diemSinhVien;
+}
+
+void SinhVien::setDiemSinhVien(Diem diemSinhVien) {
+    this->diemSinhVien = diemSinhVien;
+}
+
+istream &operator >> (istream &in, SinhVien &sinhVien) {
+    getline(in, sinhVien.hoTen);
+    getline(in, sinhVien.maSinhVien);
+    in >> sinhVien.diemSinhVien;
+    return in;
+}
+
+ostream &operator << (ostream &out, const SinhVien &sinhVien) {
+    out << fixed << setprecision(1);
+    out << "Ho Ten: " << sinhVien.hoTen << endl;
+    out << "Ma Sinh Vien: " << sinhVien.maSinhVien << endl;
+    out << "DTB: " << sinhVien.diemTrungBinhCong() << endl;
+    return out;
+}
+
+SinhVien &SinhVien::operator = (const SinhVien &other) {
+    if (this == &other)
+        return *this;
+
+    hoTen = other.hoTen;
+    maSinhVien = other.maSinhVien;
+    diemSinhVien = other.diemSinhVien;
+    return *this;
+}
+
+bool SinhVien::operator < (const SinhVien &other) {
+    return this->diemTrungBinhCong() < other.diemTrungBinhCong();
+}
+
+double SinhVien::diemTrungBinhCong() const {
+    return diemSinhVien.trungBinhCong();
 }

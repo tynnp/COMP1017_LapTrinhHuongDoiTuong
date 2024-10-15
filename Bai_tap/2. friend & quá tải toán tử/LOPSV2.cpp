@@ -100,6 +100,7 @@ istream &operator >> (istream &in, Diem &diem) {
     string strLine;
     double diemTungMon;
 
+    // xử lý các số trên 1 dòng
     getline(in, strLine);
     stringstream ssLine(strLine);
 
